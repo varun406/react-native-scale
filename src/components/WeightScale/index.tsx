@@ -43,7 +43,7 @@ const Scale = () => {
         alignItems: 'center',
         backgroundColor: '#fff',
       }}>
-      {/* <View
+      <View
         style={{
           position: 'absolute',
           zIndex: 9,
@@ -54,7 +54,7 @@ const Scale = () => {
         <Text style={[styles.numbers, {color: '#4B70F5'}]}>
           {state.currentNumber}
         </Text>
-      </View> */}
+      </View>
 
       <View style={{height: 100}}>
         <Animated.FlatList
@@ -160,7 +160,7 @@ const Scale = () => {
                   alignItems: 'center',
                 }}
                 key={index}>
-                <View
+                {/* <View
                   style={{
                     position: 'absolute',
                     zIndex: 9,
@@ -175,7 +175,7 @@ const Scale = () => {
                     ]}>
                     {index + 1}
                   </Animated.Text>
-                </View>
+                </View> */}
 
                 <Animated.View
                   style={{
