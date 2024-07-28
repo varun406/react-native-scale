@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     flexDirection: 'row',
-    // overflow: 'hidden',
+    justifyContent: 'space-around',
   },
 });
 

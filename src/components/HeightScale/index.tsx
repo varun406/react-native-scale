@@ -29,6 +29,14 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
       (index + 1) * ITEM_SIZE,
     ];
 
+    const inputRangeOpacity = [
+      (index - 2) * ITEM_SIZE,
+      (index - 1) * ITEM_SIZE,
+      index * ITEM_SIZE,
+      (index + 1) * ITEM_SIZE,
+      (index + 2) * ITEM_SIZE,
+    ];
+
     const numberColor = scrollY.interpolate({
       inputRange,
       outputRange: ['#686D76', '#4B70F5', '#686D76'],
@@ -39,6 +47,11 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
       inputRange,
       outputRange: [1, 1.7, 1],
       extrapolate: 'clamp',
+    });
+
+    const numberOpacity = scrollY.interpolate({
+      inputRange: inputRangeOpacity,
+      outputRange: [0.3, 0.8, 1, 0.8, 0.3],
     });
 
     const lineColors = [
@@ -153,34 +166,6 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
       }),
     ];
 
-    const lineWidthReverse = [
-      scrollY.interpolate({
-        inputRange,
-        outputRange: [15, 20, 15],
-        extrapolate: 'clamp',
-      }),
-      scrollY.interpolate({
-        inputRange,
-        outputRange: [15, 28, 15],
-        extrapolate: 'clamp',
-      }),
-      scrollY.interpolate({
-        inputRange,
-        outputRange: [15, 35, 15],
-        extrapolate: 'clamp',
-      }),
-      scrollY.interpolate({
-        inputRange,
-        outputRange: [15, 28, 15],
-        extrapolate: 'clamp',
-      }),
-      scrollY.interpolate({
-        inputRange,
-        outputRange: [15, 20, 15],
-        extrapolate: 'clamp',
-      }),
-    ];
-
     return (
       <View style={{alignItems: 'center'}} key={index}>
         <View
@@ -201,7 +186,7 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
                     {
                       backgroundColor: lineColors[i],
                       height: 1.5,
-                      width: reverse ? lineWidthReverse[i] : lineWidth[i],
+                      width: lineWidth[i],
                       transform: [
                         {
                           translateX: reverse
@@ -220,12 +205,16 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
           <View
             style={[
               styles.numberContainer,
-              {alignItems: reverse ? 'flex-start' : 'flex-end'},
+              {alignItems: reverse ? 'flex-start' : 'center'},
             ]}>
             <Animated.Text
               style={[
                 styles.numbers,
-                {color: numberColor, transform: [{scale: numberScale}]},
+                {
+                  color: numberColor,
+                  opacity: numberOpacity,
+                  transform: [{scale: numberScale}],
+                },
               ]}>
               {item?.id}
             </Animated.Text>
@@ -265,7 +254,7 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
       <View
         style={[
           styles.suffixContainer,
-          reverse ? {left: '36%'} : {right: '5%'},
+          reverse ? {left: '36%'} : {right: '15%'},
         ]}>
         <Text style={styles.suffixText}>{suffix}</Text>
       </View>
@@ -282,7 +271,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: CONTAINER_HEIGHT,
-    backgroundColor: 'pink',
   },
   suffixContainer: {
     position: 'absolute',
