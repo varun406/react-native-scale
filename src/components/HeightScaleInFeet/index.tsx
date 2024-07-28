@@ -10,7 +10,7 @@ interface HeightScaleProps {
   suffix?: string;
 }
 
-const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
+const HeightScaleInFeet = ({reverse = false, suffix}: HeightScaleProps) => {
   const scrollY = useRef(new Animated.Value(0)).current;
   const [currentNumber, setCurrentNumber] = useState<number | null>(null);
   const TEMP = Array.from({length: 10}, (_, i) => ({id: i + 1}));
@@ -262,7 +262,7 @@ const HeightScale = ({reverse = false, suffix}: HeightScaleProps) => {
   );
 };
 
-export default HeightScale;
+export default HeightScaleInFeet;
 
 const styles = StyleSheet.create({
   scaleContainer: {
