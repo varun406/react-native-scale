@@ -10,6 +10,7 @@ import {
 import Scale from './src/components/Scale';
 import WeightScale from './src/components/WeightScale';
 import QuestionScreen from './src/components/Questions';
+import HeightScale from './src/components/HeightScale';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -20,9 +21,11 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
-        {/* <Scale />
-        <WeightScale /> */}
-        <QuestionScreen />
+        {/* <Scale /> */}
+        <HeightScale suffix="ft" />
+        <HeightScale suffix="in" reverse />
+        {/* <WeightScale /> */}
+        {/* <QuestionScreen /> */}
       </View>
     </View>
   );
@@ -34,6 +37,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
+    flexDirection: 'row',
     // overflow: 'hidden',
   },
 });
